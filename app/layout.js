@@ -1,31 +1,34 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans, Noto_Sans_Georgian } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// "Noto Sans Book" ≈ Regular (400), plus Medium (500) per brand spec.
+const notoSans = Noto_Sans({
+  variable: "--font-noto",
   subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const notoSansGeorgian = Noto_Sans_Georgian({
+  variable: "--font-noto-ge",
+  subsets: ["georgian"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 export const metadata = {
-  title: "Motion Ease — Motion Design Studio",
+  title: "Motion Ease — საიტი მალე განახლდება",
   description:
-    "Motion Ease is a motion design studio crafting animations that make brands move.",
+    "Motion Ease — მოუშენ იზი. საიტი მალე განახლდება. დაგვიკავშირდით: contact@studiomotionease.com",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="ka"
+      className={`${notoSans.variable} ${notoSansGeorgian.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
-        {children}
-      </body>
+      <body className="min-h-full">{children}</body>
     </html>
   );
 }
