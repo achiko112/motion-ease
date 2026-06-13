@@ -2,15 +2,18 @@
 
 import React from "react";
 
-// Coverflow-style photo carousel (auto-advancing) adapted to plain JS.
-// Pass `images` as [{ src, alt }]. Replace the placeholder works with real ones.
+// Coverflow-style carousel (auto-advancing) that supports both images and
+// videos. Each entry is { src, alt, poster? }; a .mp4/.webm/.mov src renders
+// as a muted, looping <video> (only the centered one plays), anything else
+// renders as an <img>.
+const isVideo = (src) => /\.(mp4|webm|mov|m4v|ogv)$/i.test(src);
+
 export default function FeatureCarousel({ images, className = "" }) {
   const [currentIndex, setCurrentIndex] = React.useState(
     Math.floor(images.length / 2)
   );
 
-  const handleNext = () =>
-    setCurrentIndex((i) => (i + 1) % images.length);
+  const handleNext = () => setCurrentIndex((i) => (i + 1) % images.length);
   const handlePrev = () =>
     setCurrentIndex((i) => (i - 1 + images.length) % images.length);
 
@@ -51,11 +54,7 @@ export default function FeatureCarousel({ images, className = "" }) {
                 visibility: Math.abs(pos) > 1 ? "hidden" : "visible",
               }}
             >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="h-full w-full rounded-3xl border-2 border-blue-dark/10 object-cover shadow-2xl"
-              />
+              <Slide media={image} active={isCenter} />
             </div>
           );
         })}
@@ -79,6 +78,44 @@ export default function FeatureCarousel({ images, className = "" }) {
       </button>
     </div>
   );
+}
+
+function Slide({ media, active }) {
+  const videoRef = React.useRef(null);
+
+  // Play only the centered video; pause and rewind the rest.
+  React.useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (active) {
+      const p = v.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    } else {
+      v.pause();
+      v.currentTime = 0;
+    }
+  }, [active]);
+
+  const cls =
+    "h-full w-full rounded-3xl border-2 border-blue-dark/10 object-cover shadow-2xl";
+
+  if (isVideo(media.src)) {
+    return (
+      <video
+        ref={videoRef}
+        className={cls}
+        src={media.src}
+        poster={media.poster}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label={media.alt}
+      />
+    );
+  }
+
+  return <img src={media.src} alt={media.alt} className={cls} />;
 }
 
 function Chevron({ dir }) {

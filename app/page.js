@@ -7,7 +7,11 @@ const GMAIL_COMPOSE = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}`;
 const FB_URL = "https://www.facebook.com/profile.php?id=61588563495145";
 const IG_URL = "https://www.instagram.com/motion_ease/";
 
-// Placeholder works — swap the src paths with real renders/photos later.
+// Carousel items. Each entry is { src, alt, poster? }.
+//   • Image:  { src: "/portfolio/work-1.svg", alt: "..." }
+//   • Video:  { src: "/portfolio/work-1.mp4", alt: "...", poster: "/portfolio/work-1.jpg" }
+// A .mp4/.webm src auto-renders as a muted, looping video (1080x1350 / 4:5).
+// Drop your files in public/portfolio/ and point the src here.
 const WORKS = [
   { src: "/portfolio/work-1.svg", alt: "Motion Ease ნამუშევარი 1" },
   { src: "/portfolio/work-2.svg", alt: "Motion Ease ნამუშევარი 2" },
