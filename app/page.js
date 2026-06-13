@@ -34,7 +34,7 @@ export default function Home() {
           width={1735}
           height={427}
           priority
-          className="h-auto w-[clamp(130px,16vw,200px)]"
+          className="h-auto w-[clamp(155px,16vw,200px)]"
         />
       </header>
 
@@ -45,7 +45,7 @@ export default function Home() {
           {/* Written in Mtavruli (Georgian all-caps, uniform height).
               CSS text-transform doesn't map mkhedruli→mtavruli, so the
               capital glyphs are used directly. */}
-          <h1 className="text-[clamp(2.25rem,7vw,5.5rem)] font-extrabold leading-[1.25] tracking-tight">
+          <h1 className="text-[clamp(2.65rem,7vw,5.5rem)] font-extrabold leading-[1.25] tracking-tight">
             ᲛᲐᲚᲔ
             <br />
             ᲓᲐᲕᲘᲬᲧᲔᲑᲗ
