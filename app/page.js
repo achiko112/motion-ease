@@ -25,7 +25,7 @@ const WORKS = [
 
 export default function Home() {
   return (
-    <main className="relative flex min-h-dvh flex-col overflow-hidden bg-cream px-[clamp(1.5rem,6vw,6rem)] py-[clamp(1.5rem,4.5vh,3rem)] text-blue-dark">
+    <main className="relative flex min-h-dvh flex-col overflow-hidden bg-cream px-[clamp(1.25rem,6vw,6rem)] py-[clamp(1.5rem,4.5vh,3rem)] text-blue-dark">
       {/* ── Logo (exact brand artwork) — centered on mobile, left on desktop ── */}
       <header className="relative z-10 flex justify-center lg:block">
         <Image
@@ -34,7 +34,7 @@ export default function Home() {
           width={1735}
           height={427}
           priority
-          className="h-auto w-[clamp(155px,16vw,200px)]"
+          className="h-auto w-[clamp(170px,16vw,200px)]"
         />
       </header>
 
@@ -45,7 +45,7 @@ export default function Home() {
           {/* Written in Mtavruli (Georgian all-caps, uniform height).
               CSS text-transform doesn't map mkhedruli→mtavruli, so the
               capital glyphs are used directly. */}
-          <h1 className="text-[clamp(2.65rem,7vw,5.5rem)] font-extrabold leading-[1.25] tracking-tight">
+          <h1 className="text-[clamp(3.15rem,7vw,5.5rem)] font-extrabold leading-[1.25] tracking-tight">
             ᲛᲐᲚᲔ
             <br />
             ᲓᲐᲕᲘᲬᲧᲔᲑᲗ
