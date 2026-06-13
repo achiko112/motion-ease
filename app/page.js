@@ -13,11 +13,11 @@ const IG_URL = "https://www.instagram.com/motion_ease/";
 // A .mp4/.webm src auto-renders as a muted, looping video (1080x1350 / 4:5).
 // Drop your files in public/portfolio/ and point the src here.
 const WORKS = [
-  { src: "/portfolio/work-1.svg", alt: "work-1.mp4" },
-  { src: "/portfolio/work-2.svg", alt: "work-2.mp4" },
-  { src: "/portfolio/work-3.svg", alt: "work-3.mp4" },
-  { src: "/portfolio/work-4.svg", alt: "work-4.mp4" },
-  { src: "/portfolio/work-5.svg", alt: "work-5.mp4" },
+  { src: "/portfolio/work-1.mp4", alt: "Motion Ease ნამუშევარი 1" },
+  { src: "/portfolio/work-2.mp4", alt: "Motion Ease ნამუშევარი 2" },
+  { src: "/portfolio/work-3.mp4", alt: "Motion Ease ნამუშევარი 3" },
+  { src: "/portfolio/work-4.mp4", alt: "Motion Ease ნამუშევარი 4" },
+  { src: "/portfolio/work-5.mp4", alt: "Motion Ease ნამუშევარი 5" },
 ];
 
 export default function Home() {
