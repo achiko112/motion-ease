@@ -5,14 +5,14 @@ import "./globals.css";
 const notoSans = Noto_Sans({
   variable: "--font-noto",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "800"],
   display: "swap",
 });
 
 const notoSansGeorgian = Noto_Sans_Georgian({
   variable: "--font-noto-ge",
   subsets: ["georgian"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "800"],
   display: "swap",
 });
 

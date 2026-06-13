@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 const EMAIL = "contact@studiomotionease.com";
+// Opens Gmail's compose window with the address pre-filled.
+const GMAIL_COMPOSE = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}`;
 const FB_URL = "https://www.facebook.com/profile.php?id=61588563495145";
 const IG_URL = "https://www.instagram.com/motion_ease/";
 
@@ -10,8 +12,8 @@ export default function Home() {
       {/* ── Decorative motion-design line art (cream area) ── */}
       <LineArtCream />
 
-      {/* ── Logo (exact brand artwork) ── */}
-      <header className="relative z-10 flex justify-center px-6 pt-10 sm:pt-14">
+      {/* ── Logo (exact brand artwork) — sits fully within the cream area ── */}
+      <header className="relative z-10 flex justify-center px-6 pb-24 pt-10 sm:pb-28 sm:pt-14">
         <Image
           src="/logo.png"
           alt="Motion Ease — მოუშენ იზი"
@@ -41,18 +43,20 @@ export default function Home() {
         <LineArtBlue />
 
         <div className="relative z-10 flex w-full max-w-2xl flex-col items-center">
-          <h1 className="text-balance text-3xl font-medium leading-tight tracking-tight text-cream sm:text-5xl lg:text-6xl">
+          <h1 className="whitespace-nowrap text-[clamp(1.5rem,6.6vw,4rem)] font-extrabold leading-none tracking-tight text-cream">
             საიტი მალე განახლდება
           </h1>
 
           <a
-            href={`mailto:${EMAIL}`}
+            href={GMAIL_COMPOSE}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-9 inline-flex items-center rounded-full bg-cream px-7 py-3 text-sm font-medium text-blue-dark shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-md sm:text-base"
           >
             Contact@studiomotionease.com
           </a>
 
-          <div className="mt-7 flex items-center gap-4">
+          <div className="mt-8 flex items-center gap-5">
             <SocialLink href={FB_URL} label="Facebook">
               <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.52 1.5-3.91 3.78-3.91 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.9h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94Z" />
             </SocialLink>
@@ -74,9 +78,9 @@ function SocialLink({ href, label, children }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="flex h-11 w-11 items-center justify-center rounded-full bg-cream text-blue transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-md"
+      className="flex h-14 w-14 items-center justify-center rounded-full bg-cream text-blue transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-md sm:h-16 sm:w-16"
     >
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+      <svg viewBox="0 0 24 24" className="h-7 w-7 sm:h-8 sm:w-8" fill="currentColor" aria-hidden="true">
         {children}
       </svg>
     </a>
