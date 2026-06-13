@@ -9,9 +9,8 @@ import React from "react";
 const isVideo = (src) => /\.(mp4|webm|mov|m4v|ogv)$/i.test(src);
 
 export default function FeatureCarousel({ images, className = "" }) {
-  const [currentIndex, setCurrentIndex] = React.useState(
-    Math.floor(images.length / 2)
-  );
+  // Start on the first item so the sequence always runs 1 → N in order.
+  const [currentIndex, setCurrentIndex] = React.useState(0);
 
   const handleNext = () => setCurrentIndex((i) => (i + 1) % images.length);
   const handlePrev = () =>
