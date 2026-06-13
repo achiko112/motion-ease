@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900">
+  <rect width="600" height="900" fill="#F8F3F0"/>
+  <rect x="20" y="20" width="560" height="860" rx="28" fill="none" stroke="#014CA9" stroke-width="4" stroke-opacity="0.25"/>
+  <circle cx="300" cy="380" r="74" fill="none" stroke="#014CA9" stroke-width="6"/>
+  <path d="M278 340 L342 380 L278 420 Z" fill="#014CA9"/>
+  <text x="300" y="560" text-anchor="middle" fill="#014CA9" font-family="Arial, sans-serif" font-size="40" font-weight="800" letter-spacing="2">MOTION EASE</text>
+  <text x="300" y="610" text-anchor="middle" fill="#014CA9" fill-opacity="0.6" font-family="Arial, sans-serif" font-size="26" letter-spacing="6">PORTFOLIO 05</text>
+</svg>
