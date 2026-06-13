@@ -24,7 +24,7 @@ export default function FeatureCarousel({ images, className = "" }) {
 
   return (
     <div
-      className={`relative flex h-[300px] w-full items-center justify-center md:h-[420px] ${className}`}
+      className={`relative flex h-[340px] w-full items-center justify-center md:h-[460px] ${className}`}
     >
       <div className="relative flex h-full w-full items-center justify-center [perspective:1000px]">
         {images.map((image, index) => {
@@ -39,7 +39,7 @@ export default function FeatureCarousel({ images, className = "" }) {
           return (
             <div
               key={index}
-              className="absolute flex h-60 w-40 items-center justify-center transition-all duration-500 ease-in-out md:h-80 md:w-52"
+              className="absolute flex aspect-[4/5] w-44 items-center justify-center transition-all duration-500 ease-in-out md:w-64"
               style={{
                 transform: `translateX(${pos * 45}%) scale(${
                   isCenter ? 1 : isAdjacent ? 0.85 : 0.7

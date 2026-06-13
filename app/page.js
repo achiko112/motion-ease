@@ -19,8 +19,8 @@ const WORKS = [
 export default function Home() {
   return (
     <main className="relative flex min-h-dvh flex-col overflow-hidden bg-cream px-[clamp(1.5rem,6vw,6rem)] py-[clamp(1.5rem,4.5vh,3rem)] text-blue-dark">
-      {/* ── Logo (exact brand artwork), top-left ── */}
-      <header className="relative z-10">
+      {/* ── Logo (exact brand artwork) — centered on mobile, left on desktop ── */}
+      <header className="relative z-10 flex justify-center lg:block">
         <Image
           src="/logo.png"
           alt="Motion Ease — მოუშენ იზი"
@@ -35,10 +35,13 @@ export default function Home() {
       <section className="relative z-10 grid flex-1 items-center gap-10 py-10 lg:grid-cols-2 lg:gap-8">
         {/* Left: copy */}
         <div>
-          <h1 className="text-[clamp(2.75rem,9vw,7rem)] font-extrabold leading-[1.1] tracking-tight">
-            მალე
+          {/* Written in Mtavruli (Georgian all-caps, uniform height).
+              CSS text-transform doesn't map mkhedruli→mtavruli, so the
+              capital glyphs are used directly. */}
+          <h1 className="text-center text-[clamp(2.5rem,8.5vw,6.5rem)] font-extrabold leading-[1.25] tracking-tight lg:text-left">
+            ᲛᲐᲚᲔ
             <br />
-            დავიწყებთ
+            ᲓᲐᲕᲘᲬᲧᲔᲑᲗ
           </h1>
 
           <p className="mt-7 max-w-md text-[clamp(0.95rem,1.4vw,1.125rem)] leading-relaxed">

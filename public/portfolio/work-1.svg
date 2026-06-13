@@ -1,13 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350">
   <defs>
     <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#014CA9"/>
       <stop offset="1" stop-color="#446BD8"/>
     </linearGradient>
   </defs>
-  <rect width="600" height="900" fill="url(#g1)"/>
-  <circle cx="300" cy="380" r="74" fill="none" stroke="#F8F3F0" stroke-width="5" stroke-opacity="0.9"/>
-  <path d="M278 340 L342 380 L278 420 Z" fill="#F8F3F0"/>
-  <text x="300" y="560" text-anchor="middle" fill="#F8F3F0" font-family="Arial, sans-serif" font-size="40" font-weight="800" letter-spacing="2">MOTION EASE</text>
-  <text x="300" y="610" text-anchor="middle" fill="#F8F3F0" fill-opacity="0.7" font-family="Arial, sans-serif" font-size="26" letter-spacing="6">PORTFOLIO 01</text>
+  <rect width="1080" height="1350" fill="url(#g1)"/>
+  <circle cx="540" cy="540" r="100" fill="none" stroke="#F8F3F0" stroke-width="7" stroke-opacity="0.9"/>
+  <path d="M508 485 L596 540 L508 595 Z" fill="#F8F3F0"/>
+  <text x="540" y="840" text-anchor="middle" fill="#F8F3F0" font-family="Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="3">MOTION EASE</text>
+  <text x="540" y="905" text-anchor="middle" fill="#F8F3F0" fill-opacity="0.7" font-family="Arial, sans-serif" font-size="34" letter-spacing="8">PORTFOLIO 01</text>
 </svg>
