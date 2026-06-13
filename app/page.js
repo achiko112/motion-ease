@@ -13,7 +13,7 @@ export default function Home() {
       <LineArtCream />
 
       {/* ── Logo (exact brand artwork) — sits fully within the cream area ── */}
-      <header className="relative z-10 flex justify-center px-6 pb-24 pt-10 sm:pb-28 sm:pt-14">
+      <header className="relative z-10 flex justify-center px-6 pb-12 pt-5 sm:pb-14 sm:pt-7">
         <Image
           src="/logo.png"
           alt="Motion Ease — მოუშენ იზი"
