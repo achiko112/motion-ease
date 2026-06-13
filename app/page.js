@@ -8,95 +8,102 @@ const IG_URL = "https://www.instagram.com/motion_ease/";
 
 export default function Home() {
   return (
-    <main className="relative flex min-h-dvh flex-col overflow-hidden bg-cream">
-      {/* ── Decorative motion-design line art (cream area) ── */}
-      <LineArtCream />
+    <main className="relative flex min-h-dvh flex-col overflow-hidden bg-cream px-[clamp(1.5rem,6vw,6rem)] py-[clamp(1.5rem,4.5vh,3rem)] text-blue-dark">
+      {/* Subtle motion-design line art filling the empty right side */}
+      <LineArt />
 
-      {/* ── Logo (exact brand artwork) — sits fully within the cream area ── */}
-      <header className="relative z-10 flex justify-center px-6 pb-12 pt-5 sm:pb-14 sm:pt-7">
+      {/* ── Logo (exact brand artwork), top-left ── */}
+      <header className="relative z-10">
         <Image
           src="/logo.png"
           alt="Motion Ease — მოუშენ იზი"
           width={1735}
           height={427}
           priority
-          className="h-auto w-[clamp(220px,42vw,440px)]"
+          className="h-auto w-[clamp(130px,16vw,200px)]"
         />
       </header>
 
-      {/* ── Blue wave section ── */}
-      <section className="relative flex flex-1 flex-col items-center justify-center bg-blue px-6 pb-16 pt-10 text-center">
-        {/* Wavy top edge of the blue block */}
-        <svg
-          className="pointer-events-none absolute inset-x-0 top-0 h-[7vw] max-h-20 min-h-10 w-full -translate-y-[99%]"
-          viewBox="0 0 1440 100"
-          preserveAspectRatio="none"
-          aria-hidden="true"
+      {/* ── Main copy, left-aligned, vertically centered ── */}
+      <section className="relative z-10 flex flex-1 flex-col justify-center py-10">
+        <h1 className="text-[clamp(2.75rem,9vw,7rem)] font-extrabold leading-[0.95] tracking-tight">
+          მალე
+          <br />
+          დავიწყებთ
+        </h1>
+
+        <p className="mt-7 max-w-md text-[clamp(0.95rem,1.4vw,1.125rem)] leading-relaxed">
+          რეკლამაში ჩადებული თანხა ინვესტიციაა, რომელიც სწორ ვიზუალს საჭიროებს.
+          Motion Ease ქმნის მოძრავ კონტენტს, რომელიც არა მხოლოდ ლამაზია, არამედ
+          მომხმარებლის ყურადღებას წამებში იპყრობს.
+        </p>
+
+        <a
+          href={GMAIL_COMPOSE}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-9 inline-flex w-fit items-center rounded-full border-[1.5px] border-blue-dark px-8 py-3 text-sm font-medium text-blue-dark transition-colors duration-200 hover:bg-blue-dark hover:text-cream sm:text-base"
         >
-          <path
-            fill="#446bd8"
-            d="M0,52 C180,10 360,8 540,42 C720,76 900,82 1080,52 C1260,24 1380,30 1440,46 L1440,100 L0,100 Z"
-          />
-        </svg>
-
-        {/* Decorative motion-design line art (blue area) */}
-        <LineArtBlue />
-
-        <div className="relative z-10 flex w-full max-w-2xl flex-col items-center">
-          <h1 className="whitespace-nowrap text-[clamp(1.5rem,6.6vw,4rem)] font-extrabold leading-none tracking-tight text-cream">
-            საიტი მალე განახლდება
-          </h1>
-
-          <a
-            href={GMAIL_COMPOSE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-9 inline-flex items-center rounded-full bg-cream px-7 py-3 text-sm font-medium text-blue-dark shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-md sm:text-base"
-          >
-            Contact@studiomotionease.com
-          </a>
-
-          <div className="mt-8 flex items-center gap-5">
-            <SocialLink href={FB_URL} label="Facebook">
-              <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.52 1.5-3.91 3.78-3.91 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.9h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94Z" />
-            </SocialLink>
-            <SocialLink href={IG_URL} label="Instagram">
-              <path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 1.62c-3.15 0-3.52.01-4.76.07-1.15.05-1.77.24-2.19.4-.55.22-.94.47-1.35.88-.41.41-.66.8-.88 1.35-.16.42-.35 1.04-.4 2.19-.06 1.24-.07 1.61-.07 4.76s.01 3.52.07 4.76c.05 1.15.24 1.77.4 2.19.22.55.47.94.88 1.35.41.41.8.66 1.35.88.42.16 1.04.35 2.19.4 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c1.15-.05 1.77-.24 2.19-.4.55-.22.94-.47 1.35-.88.41-.41.66-.8.88-1.35.16-.42.35-1.04.4-2.19.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.05-1.15-.24-1.77-.4-2.19a3.6 3.6 0 0 0-.88-1.35 3.6 3.6 0 0 0-1.35-.88c-.42-.16-1.04-.35-2.19-.4-1.24-.06-1.61-.07-4.76-.07Zm0 2.76a5.3 5.3 0 1 1 0 10.6 5.3 5.3 0 0 1 0-10.6Zm0 1.62a3.68 3.68 0 1 0 0 7.36 3.68 3.68 0 0 0 0-7.36Zm5.5-2.9a1.24 1.24 0 1 1 0 2.48 1.24 1.24 0 0 1 0-2.48Z" />
-            </SocialLink>
-          </div>
-        </div>
+          დაგვიკავშირდი
+        </a>
       </section>
+
+      {/* ── Social links, bottom-left ── */}
+      <footer className="relative z-10 flex items-center gap-4">
+        <span className="text-sm font-medium tracking-wide sm:text-base">
+          სოც. ქსელები
+        </span>
+        <span aria-hidden className="h-px w-12 bg-blue-dark/70 sm:w-16" />
+        <a
+          href={FB_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+          className="text-blue-dark transition-transform duration-200 hover:-translate-y-0.5"
+        >
+          <svg viewBox="0 0 24 24" className="h-7 w-7" aria-hidden="true">
+            <circle cx="12" cy="12" r="11" fill="currentColor" />
+            <path
+              fill="#f8f3f0"
+              d="M13.4 21v-7h2.3l.34-2.7h-2.64V9.58c0-.78.22-1.31 1.34-1.31h1.42V5.86c-.25-.03-1.09-.1-2.06-.1-2.04 0-3.44 1.25-3.44 3.54v1.98H8.4V14h2.3v7h2.7Z"
+            />
+          </svg>
+        </a>
+        <a
+          href={IG_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          className="text-blue-dark transition-transform duration-200 hover:-translate-y-0.5"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="h-7 w-7"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            aria-hidden="true"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17" cy="7" r="1.1" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+      </footer>
     </main>
   );
 }
 
-/* ── Social icon button ── */
-function SocialLink({ href, label, children }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={label}
-      className="flex h-14 w-14 items-center justify-center rounded-full bg-cream text-blue transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-md sm:h-16 sm:w-16"
-    >
-      <svg viewBox="0 0 24 24" className="h-7 w-7 sm:h-8 sm:w-8" fill="currentColor" aria-hidden="true">
-        {children}
-      </svg>
-    </a>
-  );
-}
-
-/* ── Motion-design line art over the cream header area ── */
-function LineArtCream() {
+/* ── Subtle motion-design line art on the empty right area ── */
+function LineArt() {
   return (
     <div
       className="pointer-events-none absolute inset-0 z-0 text-blue-dark"
       aria-hidden="true"
     >
-      {/* Easing / bezier curve, top-left */}
+      {/* Easing / bezier curve, upper-right */}
       <svg
-        className="drift absolute -left-4 top-4 hidden w-40 opacity-[0.10] sm:block lg:w-52"
+        className="drift absolute right-[6%] top-[14%] hidden w-44 opacity-[0.10] lg:block xl:w-56"
         viewBox="0 0 200 120"
         fill="none"
         stroke="currentColor"
@@ -111,9 +118,9 @@ function LineArtCream() {
         <circle cx="130" cy="40" r="4" />
       </svg>
 
-      {/* Concentric motion arcs, top-right */}
+      {/* Concentric motion arcs, mid-right */}
       <svg
-        className="drift-slow absolute -right-6 top-6 hidden w-40 opacity-[0.10] sm:block lg:w-48"
+        className="drift-slow absolute right-[10%] top-1/2 hidden w-48 opacity-[0.09] lg:block xl:w-60"
         viewBox="0 0 160 160"
         fill="none"
         stroke="currentColor"
@@ -125,34 +132,10 @@ function LineArtCream() {
         <path d="M70,136 A100,100 0 0 1 136,70" opacity="0.45" />
         <circle cx="120" cy="40" r="5" fill="currentColor" stroke="none" />
       </svg>
-    </div>
-  );
-}
 
-/* ── Motion-design line art over the blue area ── */
-function LineArtBlue() {
-  return (
-    <div
-      className="pointer-events-none absolute inset-0 z-0 text-cream"
-      aria-hidden="true"
-    >
-      {/* Keyframe timeline, left */}
+      {/* Dashed motion path with a node, lower-right */}
       <svg
-        className="drift absolute left-2 top-1/2 hidden w-28 -translate-y-1/2 opacity-[0.16] md:block lg:left-8 lg:w-36"
-        viewBox="0 0 120 60"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <line x1="4" y1="30" x2="116" y2="30" />
-        <rect x="20" y="22" width="14" height="14" transform="rotate(45 27 30)" fill="currentColor" stroke="none" />
-        <rect x="55" y="23" width="13" height="13" transform="rotate(45 61.5 30)" />
-        <rect x="92" y="22" width="14" height="14" transform="rotate(45 99 30)" />
-      </svg>
-
-      {/* Dashed motion path with a node, right */}
-      <svg
-        className="drift-slow absolute right-2 top-[42%] hidden w-32 opacity-[0.18] md:block lg:right-10 lg:w-44"
+        className="drift absolute bottom-[16%] right-[8%] hidden w-44 opacity-[0.10] lg:block xl:w-52"
         viewBox="0 0 160 120"
         fill="none"
         stroke="currentColor"
@@ -162,31 +145,6 @@ function LineArtBlue() {
         <path className="dash-march" d="M8,100 C50,100 60,20 150,20" />
         <circle cx="8" cy="100" r="5" fill="currentColor" stroke="none" />
         <path d="M150,20 l-12,-5 l4,9 Z" fill="currentColor" stroke="none" />
-      </svg>
-
-      {/* Play glyph, bottom-left */}
-      <svg
-        className="drift absolute bottom-10 left-6 hidden w-20 opacity-[0.14] lg:block"
-        viewBox="0 0 80 80"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      >
-        <circle cx="40" cy="40" r="34" />
-        <path d="M33,28 L55,40 L33,52 Z" fill="currentColor" stroke="none" />
-      </svg>
-
-      {/* Onion-skin frames, bottom-right */}
-      <svg
-        className="drift-slow absolute bottom-10 right-8 hidden w-28 opacity-[0.13] lg:block"
-        viewBox="0 0 120 90"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      >
-        <rect x="8" y="20" width="70" height="48" rx="6" opacity="0.5" />
-        <rect x="24" y="14" width="70" height="48" rx="6" opacity="0.75" />
-        <rect x="40" y="8" width="70" height="48" rx="6" />
       </svg>
     </div>
   );
