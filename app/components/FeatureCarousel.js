@@ -22,7 +22,7 @@ export default function FeatureCarousel({ images, className = "" }) {
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setCurrentIndex((i) => (i + 1) % images.length);
-    }, 4000);
+    }, 6000);
     return () => clearTimeout(timer);
   }, [currentIndex, images.length]);
 
@@ -43,7 +43,7 @@ export default function FeatureCarousel({ images, className = "" }) {
           return (
             <div
               key={index}
-              className="absolute flex aspect-[4/5] w-52 items-center justify-center transition-all duration-500 ease-in-out md:w-72"
+              className="absolute flex aspect-[4/5] w-52 items-center justify-center transition-all duration-1000 ease-in-out md:w-72"
               style={{
                 transform: `translateX(${pos * 45}%) scale(${
                   isCenter ? 1 : isAdjacent ? 0.85 : 0.7
