@@ -9,22 +9,23 @@ export default function FeatureCarousel({ images, className = "" }) {
     Math.floor(images.length / 2)
   );
 
-  const handleNext = React.useCallback(() => {
+  const handleNext = () =>
     setCurrentIndex((i) => (i + 1) % images.length);
-  }, [images.length]);
-
-  const handlePrev = () => {
+  const handlePrev = () =>
     setCurrentIndex((i) => (i - 1 + images.length) % images.length);
-  };
 
+  // Auto-advance. The timer resets on every index change (manual or auto),
+  // so clicking an arrow never triggers an extra automatic jump right after.
   React.useEffect(() => {
-    const timer = setInterval(handleNext, 4000);
-    return () => clearInterval(timer);
-  }, [handleNext]);
+    const timer = setTimeout(() => {
+      setCurrentIndex((i) => (i + 1) % images.length);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [currentIndex, images.length]);
 
   return (
     <div
-      className={`relative flex h-[340px] w-full items-center justify-center md:h-[460px] ${className}`}
+      className={`relative flex h-[360px] w-full items-center justify-center md:h-[520px] ${className}`}
     >
       <div className="relative flex h-full w-full items-center justify-center [perspective:1000px]">
         {images.map((image, index) => {
@@ -39,7 +40,7 @@ export default function FeatureCarousel({ images, className = "" }) {
           return (
             <div
               key={index}
-              className="absolute flex aspect-[4/5] w-44 items-center justify-center transition-all duration-500 ease-in-out md:w-64"
+              className="absolute flex aspect-[4/5] w-52 items-center justify-center transition-all duration-500 ease-in-out md:w-72"
               style={{
                 transform: `translateX(${pos * 45}%) scale(${
                   isCenter ? 1 : isAdjacent ? 0.85 : 0.7

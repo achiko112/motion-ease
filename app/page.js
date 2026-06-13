@@ -32,19 +32,19 @@ export default function Home() {
       </header>
 
       {/* ── Two columns: copy on the left, photo carousel on the right ── */}
-      <section className="relative z-10 grid flex-1 items-center gap-10 py-10 lg:grid-cols-2 lg:gap-8">
-        {/* Left: copy */}
-        <div>
+      <section className="relative z-10 grid flex-1 items-center gap-10 py-10 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
+        {/* Left: copy — centered on mobile, left-aligned on desktop */}
+        <div className="text-center lg:text-left">
           {/* Written in Mtavruli (Georgian all-caps, uniform height).
               CSS text-transform doesn't map mkhedruli→mtavruli, so the
               capital glyphs are used directly. */}
-          <h1 className="text-center text-[clamp(2.5rem,8.5vw,6.5rem)] font-extrabold leading-[1.25] tracking-tight lg:text-left">
+          <h1 className="text-[clamp(2.25rem,7vw,5.5rem)] font-extrabold leading-[1.25] tracking-tight">
             ᲛᲐᲚᲔ
             <br />
             ᲓᲐᲕᲘᲬᲧᲔᲑᲗ
           </h1>
 
-          <p className="mt-7 max-w-md text-[clamp(0.95rem,1.4vw,1.125rem)] leading-relaxed">
+          <p className="mx-auto mt-6 max-w-md text-[clamp(0.875rem,1.2vw,1rem)] leading-relaxed lg:mx-0">
             რეკლამაში ჩადებული თანხა ინვესტიციაა, რომელიც სწორ ვიზუალს საჭიროებს.
             Motion Ease ქმნის მოძრავ კონტენტს, რომელიც არა მხოლოდ ლამაზია, არამედ
             მომხმარებლის ყურადღებას წამებში იპყრობს.
