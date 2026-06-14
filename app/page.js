@@ -31,8 +31,8 @@ export default function Home() {
         <Image
           src="/logo.png"
           alt="Motion Ease — მოუშენ იზი"
-          width={1735}
-          height={427}
+          width={1717}
+          height={406}
           priority
           className="h-auto w-[clamp(170px,16vw,200px)]"
         />
