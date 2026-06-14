@@ -76,7 +76,7 @@ export default function Home() {
       {/* ── Social links, bottom-left ── */}
       <footer className="relative z-10 flex items-center gap-4">
         <span className="text-sm font-medium tracking-wide sm:text-base">
-          სოც. ქსელები
+          სოც. ქსელები და კიდევ ეხლა
         </span>
         <span aria-hidden className="h-px w-12 bg-blue-dark/70 sm:w-16" />
         <a
