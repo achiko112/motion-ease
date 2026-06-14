@@ -1,7 +1,7 @@
 import Image from "next/image";
 import FeatureCarousel from "./components/FeatureCarousel";
 
-const EMAIL = "contact@studiomotionease.com";
+const EMAIL = "contact@motionease.ge";
 // Opens Gmail's compose window with the address pre-filled.
 const GMAIL_COMPOSE = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}`;
 const FB_URL = "https://www.facebook.com/profile.php?id=61588563495145";
