@@ -82,16 +82,32 @@ export default function FeatureCarousel({ images, className = "" }) {
 function Slide({ media, active }) {
   const videoRef = React.useRef(null);
 
-  // Play only the centered video; pause and rewind the rest.
+  // Centered video plays from the start; the blurred side cards freeze on
+  // their LAST frame instead of the first.
   React.useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
+
     if (active) {
+      try {
+        v.currentTime = 0;
+      } catch {}
       const p = v.play();
       if (p && typeof p.catch === "function") p.catch(() => {});
+      return;
+    }
+
+    v.pause();
+    const seekToEnd = () => {
+      if (Number.isFinite(v.duration) && v.duration > 0) {
+        // a hair before the end so the final frame stays on screen (loop won't wrap)
+        v.currentTime = Math.max(0, v.duration - 0.05);
+      }
+    };
+    if (Number.isFinite(v.duration) && v.duration > 0) {
+      seekToEnd();
     } else {
-      v.pause();
-      v.currentTime = 0;
+      v.addEventListener("loadedmetadata", seekToEnd, { once: true });
     }
   }, [active]);
 
