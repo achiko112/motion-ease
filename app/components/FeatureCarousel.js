@@ -66,7 +66,7 @@ export default function FeatureCarousel({ images, className = "" }) {
         type="button"
         onClick={handlePrev}
         aria-label="წინა"
-        className="absolute left-0 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-blue-dark/25 bg-cream/70 text-blue-dark backdrop-blur-sm transition duration-200 hover:scale-110 hover:bg-cream active:scale-90 sm:left-2"
+        className="absolute left-0 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-blue-dark/25 bg-cream/70 text-blue-dark backdrop-blur-sm transition duration-200 hover:scale-110 hover:bg-blue-dark hover:text-cream active:scale-90 sm:left-2"
       >
         <Chevron dir="left" />
       </button>
@@ -74,7 +74,7 @@ export default function FeatureCarousel({ images, className = "" }) {
         type="button"
         onClick={handleNext}
         aria-label="შემდეგი"
-        className="absolute right-0 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-blue-dark/25 bg-cream/70 text-blue-dark backdrop-blur-sm transition duration-200 hover:scale-110 hover:bg-cream active:scale-90 sm:right-2"
+        className="absolute right-0 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-blue-dark/25 bg-cream/70 text-blue-dark backdrop-blur-sm transition duration-200 hover:scale-110 hover:bg-blue-dark hover:text-cream active:scale-90 sm:right-2"
       >
         <Chevron dir="right" />
       </button>
@@ -84,6 +84,15 @@ export default function FeatureCarousel({ images, className = "" }) {
 
 function Slide({ media, active, nearCenter }) {
   const videoRef = React.useRef(null);
+  // iOS only autoplays inline videos whose `muted` is a real property at load
+  // time; React doesn't always set it, so we force it via the ref.
+  const attachVideo = React.useCallback((el) => {
+    videoRef.current = el;
+    if (el) {
+      el.muted = true;
+      el.defaultMuted = true;
+    }
+  }, []);
   const video = isVideo(media.src);
   const renderVideo = video && nearCenter;
   const base = stripExt(media.src);
@@ -99,6 +108,7 @@ function Slide({ media, active, nearCenter }) {
     }
     // play() also kicks off buffering; if it's rejected (called before data
     // is ready), retry once the video can play.
+    v.muted = true;
     let retry;
     const p = v.play();
     if (p && typeof p.catch === "function") {
@@ -121,7 +131,7 @@ function Slide({ media, active, nearCenter }) {
   if (renderVideo) {
     return (
       <video
-        ref={videoRef}
+        ref={attachVideo}
         className={cls}
         src={media.src}
         poster={lastFrame}
