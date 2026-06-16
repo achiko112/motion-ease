@@ -2,11 +2,14 @@
 
 import React from "react";
 
-// Coverflow-style carousel (auto-advancing) that supports both images and
-// videos. Each entry is { src, alt, poster? }; a .mp4/.webm/.mov src renders
-// as a muted, looping <video> (only the centered one plays), anything else
-// renders as an <img>.
+// Coverflow carousel. Videos render only for the visible cards (center + the
+// two neighbours = max 3 decoders, so it stays light and doesn't crash); cards
+// further out are static last-frame images. The centre plays; a neighbour is
+// paused IN PLACE, so a card leaving the centre freezes on the exact frame it
+// had at that moment. A card that hasn't played yet shows its last frame
+// (poster) until it reaches the centre.
 const isVideo = (src) => /\.(mp4|webm|mov|m4v|ogv)$/i.test(src);
+const stripExt = (src) => src.replace(/\.[^.]+$/, "");
 
 export default function FeatureCarousel({ images, className = "" }) {
   // Start on the first item so the sequence always runs 1 → N in order.
@@ -16,8 +19,7 @@ export default function FeatureCarousel({ images, className = "" }) {
   const handlePrev = () =>
     setCurrentIndex((i) => (i - 1 + images.length) % images.length);
 
-  // Auto-advance. The timer resets on every index change (manual or auto),
-  // so clicking an arrow never triggers an extra automatic jump right after.
+  // Auto-advance; timer resets on every index change (manual or auto).
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setCurrentIndex((i) => (i + 1) % images.length);
@@ -38,6 +40,7 @@ export default function FeatureCarousel({ images, className = "" }) {
 
           const isCenter = pos === 0;
           const isAdjacent = Math.abs(pos) === 1;
+          const nearCenter = Math.abs(pos) <= 1; // these render as <video>
 
           return (
             <div
@@ -53,7 +56,7 @@ export default function FeatureCarousel({ images, className = "" }) {
                 visibility: Math.abs(pos) > 1 ? "hidden" : "visible",
               }}
             >
-              <Slide media={image} active={isCenter} />
+              <Slide media={image} active={isCenter} nearCenter={nearCenter} />
             </div>
           );
         })}
@@ -63,7 +66,7 @@ export default function FeatureCarousel({ images, className = "" }) {
         type="button"
         onClick={handlePrev}
         aria-label="წინა"
-        className="absolute left-0 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-blue-dark/25 bg-cream/70 text-blue-dark backdrop-blur-sm transition-colors hover:bg-cream sm:left-2"
+        className="absolute left-0 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-blue-dark/25 bg-cream/70 text-blue-dark backdrop-blur-sm transition duration-200 hover:scale-110 hover:bg-cream active:scale-90 sm:left-2"
       >
         <Chevron dir="left" />
       </button>
@@ -71,7 +74,7 @@ export default function FeatureCarousel({ images, className = "" }) {
         type="button"
         onClick={handleNext}
         aria-label="შემდეგი"
-        className="absolute right-0 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-blue-dark/25 bg-cream/70 text-blue-dark backdrop-blur-sm transition-colors hover:bg-cream sm:right-2"
+        className="absolute right-0 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-blue-dark/25 bg-cream/70 text-blue-dark backdrop-blur-sm transition duration-200 hover:scale-110 hover:bg-cream active:scale-90 sm:right-2"
       >
         <Chevron dir="right" />
       </button>
@@ -79,58 +82,63 @@ export default function FeatureCarousel({ images, className = "" }) {
   );
 }
 
-function Slide({ media, active }) {
+function Slide({ media, active, nearCenter }) {
   const videoRef = React.useRef(null);
+  const video = isVideo(media.src);
+  const renderVideo = video && nearCenter;
+  const base = stripExt(media.src);
+  const lastFrame = `${base}-last.jpg`;
 
-  // Centered video plays from the start; the blurred side cards freeze on
-  // their LAST frame instead of the first.
+  // Centre plays; a neighbour pauses in place (freezing its current frame).
   React.useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-
-    if (active) {
-      try {
-        v.currentTime = 0;
-      } catch {}
-      const p = v.play();
-      if (p && typeof p.catch === "function") p.catch(() => {});
+    if (!active) {
+      v.pause();
       return;
     }
-
-    v.pause();
-    const seekToEnd = () => {
-      if (Number.isFinite(v.duration) && v.duration > 0) {
-        // a hair before the end so the final frame stays on screen (loop won't wrap)
-        v.currentTime = Math.max(0, v.duration - 0.05);
-      }
-    };
-    if (Number.isFinite(v.duration) && v.duration > 0) {
-      seekToEnd();
-    } else {
-      v.addEventListener("loadedmetadata", seekToEnd, { once: true });
+    // play() also kicks off buffering; if it's rejected (called before data
+    // is ready), retry once the video can play.
+    let retry;
+    const p = v.play();
+    if (p && typeof p.catch === "function") {
+      p.catch(() => {
+        retry = () => {
+          v.play().catch(() => {});
+        };
+        v.addEventListener("canplay", retry, { once: true });
+      });
     }
-  }, [active]);
+    return () => {
+      if (retry) v.removeEventListener("canplay", retry);
+    };
+  }, [active, renderVideo]);
 
+  // bg keeps the card brand-coloured if a frame hasn't painted yet (no flash).
   const cls =
-    "h-full w-full rounded-3xl border-2 border-blue-dark/10 object-cover shadow-2xl";
+    "h-full w-full rounded-3xl border border-blue-dark/10 bg-blue-dark object-cover shadow-2xl";
 
-  if (isVideo(media.src)) {
+  if (renderVideo) {
     return (
       <video
         ref={videoRef}
         className={cls}
         src={media.src}
-        poster={media.poster}
+        poster={lastFrame}
+        autoPlay={active}
         muted
         loop
         playsInline
-        preload="metadata"
+        preload={active ? "auto" : "metadata"}
         aria-label={media.alt}
       />
     );
   }
 
-  return <img src={media.src} alt={media.alt} className={cls} />;
+  // Far cards (and any non-video item): a static last-frame image.
+  return (
+    <img src={video ? lastFrame : media.src} alt={media.alt} className={cls} />
+  );
 }
 
 function Chevron({ dir }) {
